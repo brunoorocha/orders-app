@@ -1,0 +1,28 @@
+import ProjectDescription
+import ProjectDescriptionHelpers
+
+let project = Project(
+    name: "{{ name }}",
+    targets: [
+        .target(
+            name: "OrderApp",
+            destinations: .iOS,
+            product: .app,
+            bundleId: "io.tuist.OrderApp",
+            infoPlist: .default,
+            sources: ["{{ name }}/Sources/**"],
+            resources: ["{{ name }}/Resources/**"],
+            dependencies: []
+        ),
+        .target(
+            name: "{{ name }}Tests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "io.tuist.{{ name }}Tests",
+            infoPlist: .default,
+            sources: ["{{ name }}/Tests/**"],
+            resources: [],
+            dependencies: [.target(name: "{{ name }}")]
+        ),
+    ]
+)
